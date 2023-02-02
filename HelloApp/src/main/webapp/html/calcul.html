@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="cal">
+      <form name="forms">
+        <input type="text" class="result" name="result" readonly>
+        <input type="button" class="clear" value="C" onclick="document.forms.result.value=''">
+        <input type="button" class="operator" value="÷" onclick="document.forms.result.value+='/'">
+        <input type="button" value="7" onclick="document.forms.result.value+='7'">
+        <input type="button" value="8" onclick="document.forms.result.value+='8'">
+        <input type="button" value="9" onclick="document.forms.result.value+='9'">
+        <input type="button" class="operator" value="×" onclick="document.forms.result.value+='*'">
+        <input type="button" value="4" onclick="document.forms.result.value+='4'">
+        <input type="button" value="5" onclick="document.forms.result.value+='5'">
+        <input type="button" value="6" onclick="document.forms.result.value+='6'">
+        <input type="button" class="operator" value="-" onclick="document.forms.result.value+='-'">
+        <input type="button" value="1" onclick="document.forms.result.value+='1'">
+        <input type="button" value="2" onclick="document.forms.result.value+='2'">
+        <input type="button" value="3" onclick="document.forms.result.value+='3'">
+        <input type="button" class="operator" value="+" onclick="document.forms.result.value+='+'">
+        <input type="button" class="zero" value="    0" onclick="document.forms.result.value+='0'">
+        <input type="button" value="." onclick="document.forms.result.value+='.'">
+        <input type="button" class="operator equal" value="＝" onclick="document.forms.result.value=eval(document.forms.result.value)">
+      </form>
+      </div>
+</body>
+</html>
