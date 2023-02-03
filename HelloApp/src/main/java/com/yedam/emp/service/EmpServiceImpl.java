@@ -13,6 +13,24 @@ public class EmpServiceImpl implements EmpService{
 	public List<EmpVO> empList() {
 		return dao.empList();
 	}
+
+	@Override
+	public int addEmp(EmpVO emp) {
+		// TODO Auto-generated method stub
+		return dao.insertEmp(emp);
+	}
+
+	@Override
+	public EmpVO getEmp(int empId) {
+		// TODO Auto-generated method stub
+		return dao.searchEmp(empId);
+	}
+
+	@Override
+	public int updateEmp(EmpVO emp) {
+		// TODO Auto-generated method stub
+		return dao.updateEmp(emp);
+	}
 	
 	
 }
