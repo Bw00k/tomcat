@@ -5,6 +5,44 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+      table,
+      td,
+      th {
+        border: 1px solid black;
+        text-align: center;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      thead tr {
+        background-color: rgb(150, 148, 148);
+      }
+      #titles {
+        float: left;
+        width: 80%;
+      }
+      #btns {
+        float: left;
+      }
+      label {
+        width: 40%;
+        background-color: rgb(241, 241, 241);
+        float: left;
+        text-align: center;
+        margin-right: 5px;
+        margin-bottom: 10px;
+      }
+      input {
+        width: 50%;
+        margin-bottom: 10px;
+      }
+      #btns button {
+        width: 100px;
+        margin-top: 15px;
+        padding: 10px;
+      }
+    </style>
 </style>
 </head>
 
@@ -12,7 +50,6 @@
 	<div id="show">
 		<h3>도서목록 페이지</h3>
 		<hr>
-		<form name="empForm" action="" method = "post">
 			<div id="titles">
 				<label class="field">도서코드</label> <input type="text" id="bookCode"><br>
 				<label class="field">도서명</label> <input type="text" id="bookName"><br>
@@ -21,9 +58,9 @@
 				<label class="field">금액</label> <input type="text" id="price"><br>
 			</div>
 			<div id="btns">
-				<button type="button">저장</button>
+				<button type="button" id="checkSv" onclick="addFnc()">저장</button>
 				<br>
-				<button type="button" id="checkDel">선택삭제</button>
+				<button type="button" id="checkDel" >선택삭제</button>
 			</div>
 			<table id="tbl" border="1">
 			<thead id="title">
@@ -38,7 +75,6 @@
 				</tr>
 				<tbody id="list"></tbody>
 			</table>
-		</form>
 	</div>
 	<script src="js/book.js"></script>
 </body>

@@ -28,13 +28,6 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/main/webapp/index.html</name>
-			<type>1</type>
-			<location>C:/Users/admin/Desktop/index.html</location>
-		</link>
-	</linkedResources>
 	<filteredResources>
 		<filter>
 			<id>1675671569540</id>

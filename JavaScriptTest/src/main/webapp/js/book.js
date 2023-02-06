@@ -21,21 +21,99 @@ let bookList = [
 ];
 
 // 목록출력하기.
+printBookList();
 // 전체목록 담아놓을 용도.
-
 function printBookList() {
-  let tr = document.createElement("tr");
-  bookList.forEach(function (item) {
-    let td = document.createElement("td");
-    td.textContent = item.bookTitle;
-    tr.appendChild(td);
-  });
-}
+  bookList.forEach(item => {
+		let tr = document.createElement("tr");
+		let td = document.createElement("td");
+		let input = document.createElement("input");
+		input.setAttribute("type","checkbox");
+		td.append(input);
+		tr.append(td);
+		
+		td = document.createElement("td");
+		td.innerText = item.bookCode;
+		tr.append(td);
 
-// 저장버튼에 submit 이벤트 등록.
-document
-  .querySelector('form[name="empForm"]')
-  .addEventListener("submit", addMemberFnc);
+		td = document.createElement("td");
+		td.innerText = item.bookTitle;
+		tr.append(td);
+
+		td = document.createElement("td");
+		td.innerText = item.bookAuthor;
+		tr.append(td);
+
+		td = document.createElement("td");
+		td.innerText = item.bookPress;
+		tr.append(td);
+
+		td = document.createElement("td");
+		td.innerText = item.bookPrice;
+		tr.append(td);
+
+		td = document.createElement("td");
+		let button = document.createElement("button");
+		button.innerText="삭제";
+
+		td.append(button);
+		tr.append(td);
+		list.append(tr);
+		
+	});
+
+}
+// 저장 처리 함수.
+/* function addFnc() {
+  let add={
+   bookCode : document.querySelector("#bookCode").value,
+   bookTitle : document.querySelector("#bookName").value,
+   bookAuthor : document.querySelector("#author").value,
+   bookPress : document.querySelector("#press").value,
+   bookPrice : document.querySelector("#price").value,
+  };
+
+  bookList.push(add);
+  printBookList();
+
+  document.querySelector("#bookCode").value = "";
+  document.querySelector("#bookName").value = "";
+  document.querySelector("#author").value = "";
+  document.querySelector("#press").value = "";
+  document.querySelector("#price").value = "";
+ 
+} */
+
+
+checkSv.addEventListener("click", function(){
+	// 저장버튼 여러번 클릭시 초기화(그전에 있던 리스트들이 또 등장하지않도록)
+	list.innerText="";
+	let add = {
+					bookCode:bookCode.value,
+			    bookTitle:bookName.value,
+		      bookAuthor:author.value,
+	        bookPress:press.value,
+          bookPrice: price.value
+					};
+
+	bookList.push(add);
+	
+	// 입력후 입력항목 초기화
+	bookCode.value="";
+	bookName.value="";
+	author.value="";
+	press.value="";
+	price.value="";
+
+	printBookList(); // 도서 목록(리스트)
+});
+//삭제
+function deleteOneSelect() {
+  let delCode = this.closest("tr").children[1];
+  let index = bookList.findIndex((e) => e.bookCode == delCode.innerText);
+  bookList.splice(index, 1);
+  showList();
+}
 
 // 전체선택 체크박스.
 document
@@ -44,33 +122,21 @@ document
 
 // 선택삭제 버튼.
 document.querySelector("#checkDel").addEventListener("click", deleteCheckedFnc);
+function deleteCheckedFnc() {
+  let tr = document.querySelectorAll('tbody input[type="checkbox"]:checked');
+  if (tr.length == 0) {
+    alert("선택된 사원이 없습니다");
+    return;
+  }
+  for (let i = 0; i < tr.length; i++) {
+    let delCode = tr[i].closest("tr").children[1].innerText;
+    let index = bookList.findIndex((e) => e.bookCode == delCode);
+    bookList.splice(index, 1);
+  }
+  printBookList();
+}
 
-// 데이터 한건 활용해서 tr 요소를 생성.
-function makeTr(item = {}) {
-  // DOM 요소생성.
-  let titles = ["id", "lastName", "email", "hireDate", "job"];
-  // 데이터 건수만큼 반복.
-  let tr = document.createElement("tr");
-  // columns 갯수만큼 반복.
-  titles.forEach(function (title) {
-    let td = document.createElement("td");
-    td.innerText = item[title];
-    tr.append(td);
-  });
-  // 삭제.
-  let td = document.createElement("td");
-  let btn = document.createElement("button");
-  btn.innerText = "삭제";
-  btn.addEventListener("click", deleteRowFunc);
-  td.append(btn);
-  tr.append(td);
-  // 수정.
-  td = document.createElement("td");
-  btn = document.createElement("button");
-  btn.innerText = "수정";
-  btn.addEventListener("click", modifyTrFunc);
-  td.append(btn);
-  tr.append(td);
+
   // 체크박스.
   td = document.createElement("td");
   let chk = document.createElement("input");
@@ -79,13 +145,13 @@ function makeTr(item = {}) {
   td.append(chk);
   tr.append(td);
 
-  // tr반환.
-  return tr;
-}
 
-// 전체선택 체크박스 - 개별체크박스 동기화.
+
+
+// 5번문제 
+
+// 전체선택 체크박스 
 function checkAllFnc() {
-  // 전체건수 vs. 선택건수 비교.
   let allTr = document.querySelectorAll("tbody#list tr");
   let chkTr = document.querySelectorAll(
     'tbody#list input[type="checkbox"]:checked'
@@ -97,31 +163,9 @@ function checkAllFnc() {
 
 // 삭제버튼 이벤트 콜백함수.
 
-// 삭제:비활성화, 변경: DB반영.
-let btn = document.createElement("button");
-btn.innerText = "삭제";
-btn.disabled = true;
-td = document.createElement("td");
-td.append(btn);
-newTr.append(td);
 
-thisTr.replaceWith(newTr);
 
-// 저장 처리 함수.
-function addMemberFnc(evnt) {
-  evnt.preventDefault();
-  console.log("여기에 출력.");
-  let bookCode = document.querySelector('input[id="bookCode"]').value;
-  let bookName = document.querySelector('input[id="bookName"]').value;
-  let author = document.querySelector('input[id="author"]').value;
-  let press = document.querySelector('input[ id="press"]').value;
-  let price = document.querySelector('input[id="price"]').value;
 
-  if (!bookCode || !bookName || !author || !press || !price) {
-    alert("필수입력값을 확인!!");
-    return;
-  }
-}
 
 // 전체선택 체크박스.
 function allCheckChange() {
@@ -131,57 +175,14 @@ function allCheckChange() {
     chk.checked = this.checked;
   });
 }
+//6번
+checkDel.addEventListener("click", function(){
+	let selectAll = document.querySelectorAll("#list input[type='checkbox']");
+	selectAll.forEach(item => {
+		if(item.checked == true){
+			item.closest("tr").remove();
+		}
+	});
+})
 
-// fetch API => 비동기방식처리. => 동기식 처리. (async, await)
-async function deleteCheckedFnc() {
-  let ids = [];
-  let chks = document.querySelectorAll('#list input[type="checkbox"]:checked');
 
-  for (let i = 0; i < chks.length; i++) {
-    let id = chks[i].parentElement.parentElement.firstChild.innerText;
-    let resp = await fetch("../empListJson?del_id=" + id, {
-      method: "DELETE",
-    });
-    let json = await resp.json();
-    console.log(json);
-    ids.push(json);
-  }
-  console.log("ids>>>>", ids); // alert(101, 102, 103 삭제했습니다!)
-
-  processAfterFetch(ids); // [{id:101,retCode:Success},{id:101,retCode:Success},]
-}
-// 화면처리.
-function processAfterFetch(ary = []) {
-  let targetTr = document.querySelectorAll("#list tr");
-  console.log(targetTr, " vs ", ary);
-  // targetTr vs. ary
-  targetTr.forEach((tr) => {
-    for (let i = 0; i < ary.length; i++) {
-      if (tr.children[0].innerText == ary[i].id) {
-        if (ary[i].retCode == "Success") {
-          tr.remove(); // Success 조건 하에 삭제.
-        } else {
-          tr.setAttribute("class", "delError");
-        }
-      }
-    }
-  });
-}
-
-// 사원 목록()
-function employeeList(curPage = 1) {
-  // init.
-  document.querySelectorAll("#list tr").forEach((item) => item.remove());
-  // 페이지별로 보여줄 건수 지정.localStorage.setItem('pagePerCnt', this.value);
-  let cntPerPage = parseInt(localStorage.getItem("pagePerCnt"));
-  let end = curPage * cntPerPage;
-  let start = end - (cntPerPage - 1);
-  let newList = totalAry.filter((emp, idx) => {
-    return idx + 1 >= start && idx < end;
-  });
-  let lst = document.getElementById("list");
-  newList.forEach((emp) => {
-    let tr = makeTr(emp);
-    lst.append(tr);
-  });
-}
