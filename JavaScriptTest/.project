@@ -34,11 +34,6 @@
 			<type>1</type>
 			<locationURI>PARENT-3-PROJECT_LOC/Desktop/index.html</locationURI>
 		</link>
-		<link>
-			<name>src/main/webapp/js/book.js</name>
-			<type>1</type>
-			<locationURI>PARENT-3-PROJECT_LOC/Desktop/book.js</locationURI>
-		</link>
 	</linkedResources>
 	<filteredResources>
 		<filter>
