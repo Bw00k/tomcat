@@ -1,7 +1,9 @@
 package com.yedam.emp.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -14,7 +16,7 @@ import com.yedam.emp.vo.EmpVO;
 public class EmpServiceMybatis implements EmpService{
 
 	SqlSessionFactory sessionFactory = 	DataSource.getInstance();
-	SqlSession session = sessionFactory.openSession();
+	SqlSession session = sessionFactory.openSession(true);
 	
 	@Override
 	public List<EmpVO> empList() {
@@ -23,8 +25,15 @@ public class EmpServiceMybatis implements EmpService{
 
 	@Override
 	public int addEmp(EmpVO emp) {
-		// TODO Auto-generated method stub
-		return 0;
+		// A ->B 송금.
+		//return session.insert("com.yedam.emp.mapper.EmpMapper.addEmp", emp);
+		int r = session.insert("com.yedam.emp.mapper.EmpMapper.addEmp", emp);
+		if(r>0) {
+			session.commit();
+		}else {
+			session.rollback();
+		}
+		return r;
 	}
 
 	@Override
@@ -43,18 +52,20 @@ public class EmpServiceMybatis implements EmpService{
 	public Map<String, String> jobList() {
 		// TODO Auto-generated method stub
 		return null;
-	}
+//			resultMap.put(key, (String) map.get(key));
+		}
+
 
 	@Override
 	public int modEmp(EmpVO emp) {
 		// TODO Auto-generated method stub
-		return 0;
+		return session.update("com.yedam.emp.mapper.EmpMapper.modEmp",emp);
 	}
 
 	@Override
 	public int removeEmp(int id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return session.delete("com.yedam.emp.mapper.EmpMapper.removeEmp", id);
 	}
 	
 

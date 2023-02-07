@@ -6,6 +6,9 @@
 <settings>
 <setting name="mapUnderscoreToCamelCase" value = "true"/>
 </settings>
+<typeAliases>
+	<typeAlias alias="MemberVO" type="com.yedam.member.vo.MemberVO"></typeAlias>
+</typeAliases>
   <environments default="development">
     <environment id="development">
       <transactionManager type="JDBC"/>
@@ -19,5 +22,6 @@
   </environments>
   <mappers>
     <mapper resource="com/yedam/emp/mapper/EmpMapper.xml"/>
+    <mapper class="com.yedam.member.mapper.MemberMapper"/>
   </mappers>
 </configuration>

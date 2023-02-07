@@ -20,6 +20,11 @@ import com.yedam.emp.command.EmpModFormControl;
 import com.yedam.emp.command.EmpRemoveControl;
 import com.yedam.emp.command.LoginControl;
 import com.yedam.emp.command.ServiceControl;
+import com.yedam.member.command.LoginFormControl;
+import com.yedam.member.command.LogoutControl;
+import com.yedam.member.command.MemberListControl;
+import com.yedam.member.command.SignOnControl;
+import com.yedam.member.command.SignOnFormControl;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -50,6 +55,14 @@ public class FrontController extends HttpServlet {
 		map.put("/empModForm.do", new EmpModFormControl()); //수정화면페이지.
 		map.put("/empModify.do", new EmpModControl()); //수정페이지
 		map.put("/empRemove.do", new EmpRemoveControl()); //삭제
+		
+		//회원관리메뉴
+		map.put("/loginForm.do", new LoginFormControl());
+		map.put("/login.do", new LoginControl());
+		map.put("/logout.do", new LogoutControl());
+		map.put("/signOnForm.do", new SignOnFormControl()); //회원가입화면.
+		map.put("/signon.do", new SignOnControl());
+		map.put("/memberList.do", new MemberListControl());
 	}
 
 	@Override

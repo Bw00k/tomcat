@@ -9,7 +9,26 @@
   
   <select id="getEmp" resultType="com.yedam.emp.vo.EmpVO" parameterType="int">
   select * from emp_temp where employee_id = #{empId}
-  
-  
   </select>
+  
+  
+  <insert id="addEmp" parameterType="com.yedam.emp.vo.EmpVO">
+  	insert into emp_temp(employee_id, last_name, email, hire_date, job_id) 
+  	values(#{employeeId},#{lastName},#{email},#{hireDate},#{jobId})"
+  </insert>
+  
+  <select id="jobList" resultType="com.yedam.emp.vo.EmpVO">
+  select job_id as "jobId", 
+  		 job_title as "jobTitle"
+  		 from jobs order by job_id 
+  </select>
+  <update id="modEmp">
+  	update emp_temp 
+  	set first_name=#{firstName}, last_name=#{lastName},email=#{email},job_id=#{jobId}, hire_date=#{hireDate} where employee_id=#{employeeId}
+  </update>
+ 
+  <delete id="removeEmp" parameterType= "int">
+  delete from emp_temp where employee_id=#{id}
+  </delete>
+
 </mapper>
